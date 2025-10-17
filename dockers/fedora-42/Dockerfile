@@ -51,19 +51,3 @@ WORKDIR /quickshell
 
 # default entrypoint is configure and build
 ENTRYPOINT ["/bin/sh", "-c", "cmake -GNinja -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DDISTRIBUTOR=karbo-fork -DCRASH_REPORTER=OFF && cmake --build build"]
-
-# ----------
-# HOW TO
-# ----------
-# docker build -f ./dockers/fedora-42/Dockerfile -t quickshell-fedora-42:latest ./dockers/fedora-42/ 
-# docker run --rm -it --user $(id -u):$(id -g) -v "$(pwd)":/quickshell -w /quickshell quickshell-fedora-42:latest
-# ----------
-
-# ----------
-# TIPS
-# ----------
-# docker run --rm -it --entrypoint /bin/bash --user $(id -u):$(id -g) -v "$(pwd)":/quickshell -w /quickshell quickshell-fedora-42:latest
-# cmake -GNinja -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DDISTRIBUTOR=karbo-fork -DCRASH_REPORTER=OFF
-# cmake --build build
-# cmake --install build
-# ----------
