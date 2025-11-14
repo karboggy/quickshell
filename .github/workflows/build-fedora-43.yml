@@ -1,4 +1,4 @@
-name: Build Fedora
+name: Build Fedora 43
 on:
   push:
     tags:
@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        fedora: [42, 43]
+        fedora: [43]
 
     steps:
       - name: Checkout
