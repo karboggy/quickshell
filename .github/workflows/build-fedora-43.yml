@@ -39,6 +39,7 @@ jobs:
             libxcb-devel \
             pipewire-devel \
             pam-devel \
+            polkit-devel \
             which
           dnf clean all
 
