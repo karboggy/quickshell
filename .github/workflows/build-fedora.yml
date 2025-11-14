@@ -24,7 +24,9 @@ jobs:
           dnf -y install \
             cmake \
             qt6-qtbase-devel \
+            qt6-qtbase-private-devel \
             qt6-qtdeclarative-devel \
+            qt6-qtdeclarative-private-devel \
             qt6-qtshadertools-devel \
             spirv-tools \
             spirv-tools-devel \
