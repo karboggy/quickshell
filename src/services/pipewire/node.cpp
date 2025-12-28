@@ -232,6 +232,30 @@ void PwNode::onInfo(void* data, const pw_node_info* info) {
 		emit self->propertiesChanged();
 	}
 
+	self->ports.clear();
+    self->activePort = -1;
+	for (uint32_t i = 0; i < info->n_ports; ++i) {
+        const auto* port = info->ports[i];
+        QString portName;
+
+        if (port->props) {
+            const char* name = spa_dict_lookup(port->props, "node.name");
+            portName = name ? QString::fromUtf8(name) : QStringLiteral("Unknown");
+        } else {
+            portName = QStringLiteral("Unknown");
+        }
+
+        self->ports.insert(port->id, portName);
+		qDebug() << portName;
+
+        // If the port is active, track it
+        // Note: PipeWire does not provide a direct 'active' flag, you may need logic based on routing
+        // if (port->change_mask & PW_PORT_CHANGE_MASK_ALL) { // placeholder, adjust if needed
+        //     self->activePort = port->id;
+        // }
+    }
+	emit portsChanged();
+
 	if (self->boundData != nullptr) {
 		self->boundData->onInfo(info);
 	}

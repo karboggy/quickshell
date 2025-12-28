@@ -233,6 +233,8 @@ public:
 	QString description;
 	QString nick;
 	QMap<QString, QString> properties;
+	QMap<int, QString> ports;
+	//int activePort;
 
 	PwNodeType::Flags type = PwNodeType::Untracked;
 
@@ -249,6 +251,7 @@ public:
 signals:
 	void propertiesChanged();
 	void readyChanged();
+	void portsChanged();
 
 private slots:
 	void onCoreSync(quint32 id, qint32 seq);

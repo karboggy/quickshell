@@ -239,6 +239,7 @@ class PwNodeAudioIface: public QObject {
 	///
 	/// > [!WARNING] This property is invalid unless the node is bound using @@PwObjectTracker.
 	Q_PROPERTY(QVector<float> volumes READ volumes WRITE setVolumes NOTIFY volumesChanged);
+
 	// clang-format on
 	QML_NAMED_ELEMENT(PwNodeAudio);
 	QML_UNCREATABLE("PwNodeAudio cannot be created directly");
@@ -315,6 +316,10 @@ class PwNodeIface: public PwObjectIface {
 	/// > [!NOTE] The node may be used before it is fully bound, but some data
 	/// > may be missing or incorrect.
 	Q_PROPERTY(bool ready READ isReady NOTIFY readyChanged);
+
+	Q_PROPERTY(QVariantMap ports READ ports NOTIFY portsChanged)
+	//Q_PROPERTY(int activePort READ activePort NOTIFY activePortChanged)
+
 	QML_NAMED_ELEMENT(PwNode);
 	QML_UNCREATABLE("PwNodes cannot be created directly");
 
@@ -332,12 +337,15 @@ public:
 	[[nodiscard]] PwNodeType::Flags type() const;
 	[[nodiscard]] QVariantMap properties() const;
 	[[nodiscard]] PwNodeAudioIface* audio() const;
+	[[nodiscard]] bool isReady() const;
+	[[nodiscard]] QVariantMap ports() const;
 
 	static PwNodeIface* instance(PwNode* node);
 
 signals:
 	void propertiesChanged();
 	void readyChanged();
+	void portsChanged();
 
 private:
 	PwNode* mNode;
